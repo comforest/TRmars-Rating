@@ -37,7 +37,7 @@
 		if($result = $mysqli->query($query)){
 			if($result->num_rows == 0){
 				if($ch) $str .= ", ";
-				$str .= $value["nick"];
+				$str .= $key;
 				$ch = true;
 			}else{
 				$row = $result->fetch_array(MYSQLI_NUM);
