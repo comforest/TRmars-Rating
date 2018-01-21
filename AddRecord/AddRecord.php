@@ -11,19 +11,35 @@
 	uasort($rank, 'cmp');
 
 
-	$rankIndex = 0;
-	$realIndex = 1;
-	$prevValue;
+	$rankarr = [];
+	$start = 1;
+	$amount = 0;
+	$prevValue = array("score"=>PHP_INT_MIN, "credit"=>PHP_INT_MIN);
+	$index = 0;
 	foreach($rank as $nick => $value){
-		if($rankIndex == 0){
-			$rankIndex = 1;
-		}else if(!($prevValue["score"] == $value["score"] && $prevValue["credit"] == $value["credit"])){
-			$rankIndex = $realIndex;
+		if(!($prevValue["score"] == $value["score"] && $prevValue["credit"] == $value["credit"])){
+			$amount /= $index - $start;
+			for($i = $start; $i < $index; ++$i){
+				$rankarr[$i] = $amount;
+			}
+			$amount = 0;
+			$start = $index;
 		}
+		++$index;
 
-		$data[$nick]["rank"] = $rankIndex;
-		++$realIndex;
+		$data[$nick]["realrank"] = $start + 1;
 		$prevValue = $value;
+		$amount += $index;
+	}
+	$amount /= $index - $start;
+	for($i = $start; $i < $index; ++$i){
+		$rankarr[$i] = $amount;
+	}
+
+	$index = 0;
+	foreach($rank as $nick => $value){
+		$data[$nick]["rank"] = $rankarr[$index];
+		++$index;
 	}
 
 	$columns = "";
@@ -55,16 +71,22 @@
 		return;
 	}
 
-	$query="INSERT INTO gameHistory(date,gameType,round$columns) values(now(), '$type', $round$values)";
+	$query="INSERT INTO game_history(date,gameType,round) values(now(), '$type', $round)";
 	$mysqli->query($query);
-	
+	$gameID = $mysqli->insert_id;
 
 	$result = array("success"=>true);
-
-
-	foreach($data as $k => $v){
-		$query = "UPDATE user set rating = $v[rating] + ".delta($k)." where id = $v[id]";
+	$index = 1;
+	foreach($data as $k=>$v){
+		$query = "INSERT INTO game_detail(game_id, user_id, turn, score, rank, prevRating, company)".
+				"values($gameID, $v[id], $index, $v[score], $v[realrank], $v[rating], '$v[company]');";
 		$mysqli->query($query);
+
+		$query = "UPDATE user set rating = ".($v["rating"] + delta($k))." where id = $v[id];";		
+		$mysqli->query($query);
+		
+		++$index;
+		
 	}
 
 	echo json_encode($result);

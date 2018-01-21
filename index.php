@@ -28,13 +28,15 @@
 					<th>순위</th>
 					<th>이름</th>
 					<th>닉네임</th>
+					<th>게임수</th>
 					<th>레이팅</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php
 				include_once $_SERVER["DOCUMENT_ROOT"]."/php/mysqli.inc";
-				$query = "SELECT name, nick, rating FROM user ORDER BY rating desc";
+				$query = "SELECT u.name, u.nick, u.rating, count(*) as gameAmount from user u LEFT JOIN game_detail g on u.id = g.user_id group by u.id order by rating desc, gameAmount desc;
+";
 				if($result = $mysqli->query($query)){
 					$rank = 1;
 					$index = 1;
@@ -48,6 +50,7 @@
 								<td>$rank</td>
 								<td>$row[name]</td>
 								<td>$row[nick]</td>
+								<td>$row[gameAmount]</td>
 								<td>$row[rating]</td>
 							</tr>
 						";
