@@ -59,7 +59,7 @@
 	$mysqli->query($query);
 	
 
-	$result = array("success"=>true, "msg" => $query);
+	$result = array("success"=>true);
 
 
 	foreach($data as $k => $v){

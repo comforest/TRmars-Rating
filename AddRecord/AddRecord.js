@@ -35,7 +35,8 @@ $(document).ready(function(){
 			}
 			arr[nick] = {"score" : score, "company" : company, "credit" : credit};
 		}
-		if(arr.length < 2){
+
+		if(Object.keys(arr).length < 2){
 			alert("플레이어 수가 부족합니다.")
 			return false;
 		}
@@ -57,9 +58,8 @@ $(document).ready(function(){
 				$("input[type='submit']").prop('disabled', false);
 				$("input[type='submit']").val("등록");
 
-				var json = JSON.parse(data);
-				if(json["success"] == false){
-					alert(json["msg"]);
+				if(data["success"] == false){
+					alert(data["msg"]);
 				}else{
 					location.href="/";
 				}
