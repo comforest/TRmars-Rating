@@ -10,9 +10,9 @@
 		</div>
 			<ul id="menu" class="nav navbar-nav">
 				<li><a href="/">Main</a></li>
-				<li><a href="/addrecord">Add Record</a></li>
-				<li><a href="/register">Register</a></li>
-				<li><a href="/gamelist">Game List</a></li>
+				<li><a href="/addRecord">Add Record</a></li>
+				<li><a href="/Register">Register</a></li>
+				<li><a href="/GameList">Game List</a></li>
 			</ul>
 	</div><!-- /.container-fluid -->
 </nav>
