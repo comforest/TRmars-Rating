@@ -33,7 +33,7 @@
 						<div class="btn-group" role="group">
 							<button type="button" class="btn btn-default radio-group-0" onclick="radio(0, 1)">주황</button>
 							<button type="button" class="btn btn-default radio-group-0" onclick="radio(0, 2)">파랑</button>
-							<button type="button" class="btn btn-default radio-group-0" onclick="radio(0, 3)">빨강</button>
+							<button type="button" class="btn btn-default radio-group-0" onclick="radio(0, 3)">초록</button>
 						</div>
 					</td>
 				</tr>

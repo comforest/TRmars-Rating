@@ -13,6 +13,7 @@
 				<li><a href="/AddRecord">Add Record</a></li>
 				<li><a href="/Register">Register</a></li>
 				<li><a href="/GameList">Game List</a></li>
+				<li><a href="/CompanyData">Company Data</a></li>
 			</ul>
 	</div><!-- /.container-fluid -->
 </nav>

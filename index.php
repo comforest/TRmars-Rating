@@ -35,8 +35,7 @@
 			<tbody>
 				<?php
 				include_once $_SERVER["DOCUMENT_ROOT"]."/php/mysqli.inc";
-				$query = "SELECT u.name, u.nick, u.rating, count(g.game_id) as gameAmount from user u LEFT JOIN game_detail g on u.id = g.user_id group by u.id order by rating desc, gameAmount desc, name desc;
-";
+				$query = "SELECT u.name, u.nick, u.rating, count(g.game_id) as gameAmount from user u LEFT JOIN game_detail g on u.id = g.user_id group by u.id order by rating desc, gameAmount desc, name desc;";
 				if($result = $mysqli->query($query)){
 					$rank = 1;
 					$index = 1;
