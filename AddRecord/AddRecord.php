@@ -97,7 +97,7 @@
 	function delta($i){
 		global $data;
 		$n = count($data);
-		return 100.0 * (($n-$data[$i]['rank'])/($n-1) - expected($i));
+		return 32 * (($n-$data[$i]['rank'])/($n-1) - expected($i));
 	}
 
 	function expected($i){
@@ -115,7 +115,7 @@
 	// data -	r1 : 자기 rating
 	//			r2 : 상대 rating
 	function winProbability($r1, $r2){
-		$n = 1.0/(1+(pow(10,($r2 - $r1)/500)));
+		$n = 1.0/(1+(pow(10,($r2 - $r1)/400)));
 		return $n;
 	}
 

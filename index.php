@@ -35,28 +35,48 @@
 			<tbody>
 				<?php
 				include_once $_SERVER["DOCUMENT_ROOT"]."/php/mysqli.inc";
-				$query = "SELECT u.name, u.nick, u.rating, count(g.game_id) as gameAmount from user u LEFT JOIN game_detail g on u.id = g.user_id group by u.id order by rating desc, gameAmount desc, name desc;";
+
+
+				$date = "2018-3-1";
+				$query = "SELECT u.name, u.nick, u.rating, count(d.game_id) as gameAmount from game_detail d INNer join game_history h on h.id = d.game_id and h.date > '$date'Right JOIN user u on u.id = d.user_id group by u.id order by rating desc, gameAmount desc, name desc;";
 				if($result = $mysqli->query($query)){
 					$rank = 1;
 					$index = 1;
 					$prevRating = 0;
+
+					$notRegister = "";
 					while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
 						if($prevRating != $row["rating"]){
 							$rank = $index;
 						}
-						echo "
-							<tr>
-								<td>$rank</td>
-								<td>$row[name]</td>
-								<td>$row[nick]</td>
-								<td>$row[gameAmount]</td>
-								<td>$row[rating]</td>
-							</tr>
-						";
 
-						++ $index;
-						$prevRating = $row["rating"];
-					}
+						if($row["gameAmount"] > 0){
+							echo "
+								<tr>
+									<td>$rank</td>
+									<td>$row[name]</td>
+									<td>$row[nick]</td>
+									<td>$row[gameAmount]</td>
+									<td>$row[rating]</td>
+								</tr>
+							";
+
+							++ $index;
+							$prevRating = $row["rating"];
+						}else{
+							$notRegister .= "
+								<tr>
+									<td>-</td>
+									<td>$row[name]</td>
+									<td>$row[nick]</td>
+									<td>$row[gameAmount]</td>
+									<td>게임 기록 X</td>
+								</tr>
+							";
+						}
+					}//while
+
+					echo $notRegister;
 				}
 				?>
 			</tbody>
