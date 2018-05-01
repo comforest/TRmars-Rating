@@ -9,11 +9,24 @@
 			<span class="navbar-brand">Vodka</span>
 		</div>
 			<ul id="menu" class="nav navbar-nav">
-				<li><a href="/">Main</a></li>
-				<li><a href="/AddRecord">Add Record</a></li>
-				<li><a href="/Register">Register</a></li>
-				<li><a href="/GameList">Game List</a></li>
-				<li><a href="/CompanyData">Company Data</a></li>
+				<?php
+					$param = "";
+					if(isset($_GET["gameid"])){
+						$param = "gameid=$_GET[gameid]";
+					}
+
+					if(strlen($param) != 0){
+						$param = "?".$param;
+					}
+				
+				echo"
+				<li><a href='/$param'>Main</a></li>
+				<li><a href='/AddRecord$param'>Add Record</a></li>
+				<li><a href='/Register$param'>Register</a></li>
+				<li><a href='/GameList$param'>Game List</a></li>
+				<li><a href='/GameData$param'>Game Data</a></li>
+				"
+				?>
 			</ul>
 	</div><!-- /.container-fluid -->
 </nav>

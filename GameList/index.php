@@ -18,6 +18,11 @@
 	<script> $("#menu li:nth-child(4)").addClass("active"); </script>
 
 	<section id="main">
+
+		<?php
+		if(isset($_GET["gameid"])){
+		?>
+
 		<label style="float:right" > <input id="viewNick" type="checkbox"> 닉네임으로 보기</label>
 		<table class="table table-striped">
 			<thead>
@@ -33,8 +38,9 @@
 				include_once $_SERVER["DOCUMENT_ROOT"]."/php/mysqli.inc";
 				
 
+				$gameInfo = $_GET["gameid"]; 
 				$datearr = [];
-				$query = "SELECT id, date from game_history";
+				$query = "SELECT id, date from game_history where game_id = $gameInfo";
 				if($result = $mysqli->query($query)){
 					while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
 						$datearr[$row["id"]] = $row["date"];
@@ -42,15 +48,19 @@
 				}
 				
 
-				$query = "SELECT g.game_id, u.name, u.nick, g.rank, g.prevRating, g.company from game_detail g Inner join user u on u.id = g.user_id order by game_id desc, turn asc";
+				$query = "SELECT g.game_id, u.name, u.nick, g.rank, g.score, g.prevRating, g.company from game_detail g Inner join user u on u.id = g.user_id order by game_id desc, turn asc";
 				if($result = $mysqli->query($query)){
 					$gameID = -1;
 					$index = 0;
 					echo"<tr>";
 					while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
 						if($gameID != $row["game_id"]){
-							if($gameID != -1){
-								while($index++ < 5){
+							if(!isset($datearr[$row["game_id"]])){
+								continue;
+							}
+
+							if($gameID != -1){ //prev row의 남은 칸 채우기
+								while($index++ < 6){
 									echo "<td></td>";
 								}
 								echo "</tr><tr>";
@@ -68,13 +78,13 @@
 						<br>
 						$row[company]
 						<br>
-						$row[rank]등
+						$row[score] / $row[rank]등
 						</td>
 						";
 						++$index;
 					}
 
-					while($index++ < 5){
+					while($index++ < 6){
 						echo "<td></td>";
 					}
 					echo "</tr>";
@@ -82,6 +92,11 @@
 			?>
 			</tbody>
 		</table>
+		<?php
+		}else{
+			include_once $_SERVER["DOCUMENT_ROOT"]."/php/chooseGame.php";
+		}
+		?>
 	</section>
 
 </body>

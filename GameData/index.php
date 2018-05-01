@@ -12,24 +12,28 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
 	<link rel="stylesheet" href="/css/main.css">
-	<script type="text/javascript" src="addRecord.js"></script>
 </head>
 <body>
 	<?php
 		include $_SERVER["DOCUMENT_ROOT"]."/php/nav.php";
 	?>
-	<script> $("#menu li:nth-child(2)").addClass("active"); </script>
+	<script> $("#menu li:nth-child(1)").addClass("active"); </script>
 	
 
 
+
+
 	<section id="main">
+
 		<?php
-		if(isset($_GET["game"])) {
-			include $_GET["game"].".inc";
+		if(isset($_GET["gameid"])) {
+			include_once "$_GET[gameid].inc";
 		}else{
 			include_once $_SERVER["DOCUMENT_ROOT"]."/php/chooseGame.php";
 		}
 		?>
+
 	</section>
+
 </body>
 </html>
