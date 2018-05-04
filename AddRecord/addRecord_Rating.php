@@ -2,7 +2,7 @@
 header("Content-Type:application/json;charset=utf-8");
 
 $data = $_POST["data"];
-$game = $_POST["gameid"];
+$game = $_POST["game"];
 
 require "checkNick.php";
 
@@ -18,7 +18,7 @@ if(isset($_POST["round"])){
 }
 
 include_once $_SERVER["DOCUMENT_ROOT"]."/php/mysqli.inc";
-$query="INSERT INTO game_history(date,game_id $q1) values(now(),$game $q2)";
+$query="INSERT INTO game_history(date,game $q1) values(now(),'$game' $q2)";
 $mysqli->query($query);
 $gameID = $mysqli->insert_id;
 
@@ -32,7 +32,7 @@ foreach($data as $k=>$v){
 	$query = "INSERT INTO game_detail(game_id, user_id, turn, score, rank, prevRating $q1) values($gameID, $v[id], $v[turn], $v[score], $v[rank], $v[rating] $q2);";
 	$mysqli->query($query);
 
-	$query = "UPDATE rating set rating = rating + ".delta($k)." where user_id = $v[id] and game_id = $game;";
+	$query = "UPDATE rating set rating = rating + ".delta($k)." where user_id = $v[id] and game = '$game';";
 	$mysqli->query($query);
 }
 

@@ -11,8 +11,8 @@
 			<ul id="menu" class="nav navbar-nav">
 				<?php
 					$param = "";
-					if(isset($_GET["gameid"])){
-						$param = "gameid=$_GET[gameid]";
+					if(isset($_GET["game"])){
+						$param = "game=$_GET[game]";
 					}
 
 					if(strlen($param) != 0){
