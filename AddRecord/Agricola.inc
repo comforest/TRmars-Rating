@@ -6,7 +6,13 @@ function read(){
 		var score = $("input[name='score"+i+"']").val();
 		var tie = $("input[name='tie"+i+"']").val();
 
-		if(nick.replace(" ", "").length == 0) break;
+		if(nick.replace(" ", "").length == 0){
+			if(i <= 2){
+				alert("플레이어 수가 부족합니다");
+				return false;
+			}
+			break;
+		}
 		if(score == 0){
 			alert("점수를 입력하세요");
 			return false;				
@@ -27,7 +33,7 @@ function read(){
 		delete arr[k]["tie"];
 	}
 
-	return {url: "addRecord_Rating.php", param : {"gameid":2, "data":arr}};
+	return {url: "addRecord_Rating.php", param : {"game":"Agricola", "data":arr}};
 }
 
 </script>
@@ -71,8 +77,6 @@ function read(){
 				";
 			}
 			?>
-			<tr>
-			</tr>
 		</tbody>
 	</table>
 	<input type="submit" class='form-control' value="등록">

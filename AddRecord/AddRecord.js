@@ -1,13 +1,8 @@
 $(document).ready(function(){
 	$('#record').submit(function () {
 
-		try{
 		var data = read();
 		if(data == false) return false;
-		if(Object.keys(data["param"]["data"]).length < 2){
-			alert("플레이어 수가 부족합니다.")
-			return false;
-		}
 
 		$("input[type='submit']").prop('disabled', true);
 		$("input[type='submit']").val("처리중");
@@ -23,7 +18,7 @@ $(document).ready(function(){
 				if(result["success"] == false){
 					alert(result["msg"]);
 				}else{
-					location.href="/?gameid="+data["param"]["gameid"];
+					location.href="/?game="+data["param"]["game"];
 				}
 			},
 			error: function (request, status, error) {
@@ -31,10 +26,6 @@ $(document).ready(function(){
 			}
 		});
 
-		}catch(e){
-			console.log(e.lineNumber + " " +e.message);
-		}
-			
 		return false;
 
 	});

@@ -22,7 +22,13 @@ function read(){
 		var company = $("select[name='company"+i+"']").val();
 		var tie = $("input[name='tie"+i+"']").val();
 
-		if(nick.replace(" ", "").length == 0) break;
+		if(nick.replace(" ", "").length == 0){
+			if(i <= 2){
+				alert("플레이어 수가 부족합니다");
+				return false;
+			}
+			break;
+		}
 		if(score < 20){
 			alert("정확한 점수를 입력하세요");
 			return false;				
@@ -45,7 +51,7 @@ function read(){
 		delete arr[k]["tie"];
 	}
 	
-	return {url: "addRecord_Rating.php", param : {"gameid":1, "type":type, "round":round, "data":arr}};
+	return {url: "addRecord_Rating.php", param : {"game":"TRmars", "type":type, "round":round, "data":arr}};
 }
 
 function radio(group, index){
@@ -144,8 +150,6 @@ function radio(group, index){
 				";
 			}
 			?>
-			<tr>
-			</tr>
 		</tbody>
 	</table>
 	<input type="submit" class='form-control' value="등록">
