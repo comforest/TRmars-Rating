@@ -53,7 +53,7 @@ function read(){
 					점수
 				</th>
 				<th class = "col-sm-2 text-center">
-					공동 순위 처리<br>(동점 시 기입)
+					공동 순위 처리<br>(높은 점수 = 높은 등수)
 				</th>
 			</tr>
 		</thead>
