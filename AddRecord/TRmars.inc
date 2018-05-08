@@ -60,6 +60,8 @@ function radio(group, index){
 }
 </script>
 
+<h2 class="text-center">테라포밍 마스</h2>
+<h4 class="text-center">점수 입력</h4>
 <form id="record">
 	<table>
 		<tr>

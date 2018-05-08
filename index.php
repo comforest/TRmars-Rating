@@ -46,8 +46,8 @@
 
 
 			$date = "2018-3-1";
-			$gameID = $_GET["gameid"];
-			$query = "SELECT u.name, u.nick, r.rating, count(d.game_id) as gameAmount from game_detail d Inner join game_history h on h.id = d.game_id and h.date > '$date' and h.game_id = $gameID Inner Join rating r on r.game_id = h.game_id and r.user_id = d.user_id Right join user u on u.id = d.user_id group by u.id, r.rating order by r.rating desc, gameAmount desc, name desc";
+			$game = $_GET["game"];
+			$query = "SELECT u.name, u.nick, r.rating, count(d.game_id) as gameAmount from game_detail d Inner join game_history h on h.id = d.game_id and h.date > '$date' and h.game = '$game' Inner Join rating r on r.game = h.game and r.user_id = d.user_id Right join user u on u.id = d.user_id group by u.id, r.rating order by r.rating desc, gameAmount desc, name desc";
 			if($result = $mysqli->query($query)){
 				$rank = 1;
 				$index = 1;
