@@ -47,7 +47,7 @@
 				<td>
 				<span class='name'>$row[name]</span>
 				<span class='nick'>$row[nick]</span>
-				(".round($row[prevRating], 2).")
+				($row[prevRating])
 				<br>
 				$row[company]
 				<br>
