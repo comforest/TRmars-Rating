@@ -34,7 +34,7 @@
 						<td>$row[name]</td>
 						<td>$row[nick]</td>
 						<td>$row[gameAmount]</td>
-						<td>".round($row["rating"])."</td>
+						<td>".round($row["rating"], 2)."</td>
 					</tr>
 				";
 
