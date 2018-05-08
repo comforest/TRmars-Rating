@@ -17,16 +17,22 @@
 	<?php
 		include $_SERVER["DOCUMENT_ROOT"]."/php/nav.php";
 	?>
+	<script> $("#menu li:nth-child(1)").addClass("active"); </script>
+	
+
+
+
 
 	<section id="main">
 		<?php
-			if(isset($_GET["game"])){
-				echo "<script>
-					window.location.href = '/LeaderBoard?game=$_GET[game]';
-				</script>";
-			}else{
-				include_once $_SERVER["DOCUMENT_ROOT"]."/php/chooseGame.php";
-			}
+		if(isset($_GET["game"])) {
+			$date = "2018-3-1";
+			$game = $_GET["game"];
+	
+			include $_GET["game"].".inc";
+		}else{
+			include_once $_SERVER["DOCUMENT_ROOT"]."/php/chooseGame.php";
+		}
 		?>
 	</section>
 

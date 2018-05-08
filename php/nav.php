@@ -6,7 +6,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>                        
 			</button>
-			<span class="navbar-brand">Rating System</span>
+			<a href='/'><span class="navbar-brand">Rating System</span></a>
 		</div>
 		<ul id="menu" class="nav navbar-nav">
 			<?php
@@ -20,7 +20,7 @@
 				}
 			
 			echo"
-			<li><a href='/$param'>Main</a></li>
+			<li><a href='/LeaderBoard$param'>LeaderBoard</a></li>
 			<li><a href='/AddRecord$param'>Add Record</a></li>
 			<li><a href='/Register$param'>Register</a></li>
 			<li><a href='/GameList$param'>Game List</a></li>
