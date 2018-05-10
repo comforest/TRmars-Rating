@@ -3,8 +3,15 @@ function read(){
 	var arr = {};
 	for(var i = 1; i <= 4; ++ i){
 		var nick = $("input[name='name"+i+"']").val();
-		var score = $("input[name='score"+i+"']").val();
-		var tie = $("input[name='tie"+i+"']").val();
+		var score = parseInt($("input[name='score"+i+"']").val(),10);
+		var tie = parseInt($("input[name='tie"+i+"']").val());
+
+		if(isNaN(score)){
+			score = 0;
+		}
+		if(isNaN(tie)){
+			tie = 0;
+		}
 
 		if(nick.replace(" ", "").length == 0){
 			if(i <= 2){
